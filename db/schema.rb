@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_17_123038) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_03_024805) do
   create_table "activity_types", charset: "utf8mb3", collation: "utf8mb3_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "abbreviation", null: false
@@ -169,6 +169,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_17_123038) do
     t.index ["task_id"], name: "index_plagiarism_match_links_on_task_id"
   end
 
+  create_table "products", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.string "title", null: false
+    t.integer "order", null: false
+    t.bigint "task_definition_id"
+    t.index ["task_definition_id"], name: "index_products_on_task_definition_id"
+  end
+
   create_table "projects", charset: "utf8mb3", collation: "utf8mb3_unicode_ci", force: :cascade do |t|
     t.bigint "unit_id"
     t.string "project_role"
@@ -201,6 +208,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_17_123038) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "stages", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.string "title", null: false
+    t.integer "order", null: false
+    t.bigint "task_definition_id"
+    t.index ["task_definition_id"], name: "index_stages_on_task_definition_id"
   end
 
   create_table "task_comments", charset: "utf8mb3", collation: "utf8mb3_unicode_ci", force: :cascade do |t|

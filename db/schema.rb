@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_15_042412) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_17_002003) do
+  create_table "actions", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.string "name"
+    t.string "type", null: false
+    t.string "action_scope_type"
+    t.bigint "action_scope_id"
+    t.string "email_template"
+    t.index ["action_scope_type", "action_scope_id"], name: "index_actions_on_action_scope"
+  end
+
   create_table "activity_types", charset: "utf8mb3", collation: "utf8mb3_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "abbreviation", null: false
@@ -52,6 +61,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_15_042412) do
     t.index ["task_comment_id", "user_id"], name: "index_comments_read_receipts_on_task_comment_id_and_user_id", unique: true
     t.index ["task_comment_id"], name: "index_comments_read_receipts_on_task_comment_id"
     t.index ["user_id"], name: "index_comments_read_receipts_on_user_id"
+  end
+
+  create_table "conditions", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.string "type", null: false
+    t.boolean "global_condition", null: false
+    t.bigint "rule_id", null: false
+    t.string "starting_letter_first_name"
+    t.integer "target_grade_checked"
+    t.integer "target_grade_operator"
+    t.index ["rule_id"], name: "index_conditions_on_rule_id"
   end
 
   create_table "discussion_comments", charset: "utf8mb3", collation: "utf8mb3_unicode_ci", force: :cascade do |t|
@@ -107,6 +126,21 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_15_042412) do
     t.boolean "locked", default: false, null: false
     t.index ["group_set_id"], name: "index_groups_on_group_set_id"
     t.index ["tutorial_id"], name: "index_groups_on_tutorial_id"
+  end
+
+  create_table "insight_action_logs", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.string "student_name", null: false
+    t.datetime "date", null: false
+    t.bigint "rule_id", null: false
+    t.index ["rule_id"], name: "index_insight_action_logs_on_rule_id"
+  end
+
+  create_table "insights", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.string "name", null: false
+    t.bigint "unit_id", null: false
+    t.integer "week"
+    t.integer "day"
+    t.index ["unit_id"], name: "index_insights_on_unit_id"
   end
 
   create_table "learning_outcome_task_links", charset: "utf8mb3", collation: "utf8mb3_unicode_ci", force: :cascade do |t|
@@ -201,6 +235,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_15_042412) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "rules", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "order", null: false
+    t.bigint "insight_id", null: false
+    t.boolean "global_rule", null: false
+    t.integer "operator", null: false
+    t.index ["insight_id"], name: "index_rules_on_insight_id"
   end
 
   create_table "stages", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|

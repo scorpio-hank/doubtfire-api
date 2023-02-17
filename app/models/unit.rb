@@ -116,7 +116,7 @@ class Unit < ApplicationRecord
   has_many :unit_roles, dependent: :destroy
   has_many :learning_outcomes, dependent: :destroy
   has_many :comments, through: :projects
-
+  has_many :insights, dependent: :destroy
   has_many :tasks, through: :projects
   has_many :groups, through: :group_sets
   has_many :tutorial_enrolments, through: :tutorials

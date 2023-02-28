@@ -50,11 +50,6 @@ class Insight < ApplicationRecord
           end
         end
       end        
-      
-      # does not appear to be printing in order?
-      # classified.each do |rule, projects|
-      #   puts "#{rule.name unless rule.nil?} matches: #{projects.length.to_s} projects => #{projects.map{|p| p.student.name}.join(", ")}"
-      # end
 
       return classified # just to make the output simpler in the short term
     end   
@@ -62,4 +57,3 @@ class Insight < ApplicationRecord
 end
 
 # Insight.last.run(true).map {|rule, projects| "#{rule.name unless rule.nil?} matches: #{projects.length.to_s} projects => #{projects.map{|p| p.student.name}.join(", ")}"}
-  

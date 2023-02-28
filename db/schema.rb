@@ -70,6 +70,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_17_002003) do
     t.string "starting_letter_first_name"
     t.integer "target_grade_checked"
     t.integer "target_grade_operator"
+    t.integer "task_status_checked"
+    t.integer "count_of_tasks"
+    t.integer "task_comparison_operator"
+    t.integer "weeks_since_task_was_due"
+    t.integer "task_grade_checked"
+    t.integer "unit_enrolment_week_check"
+    t.integer "unit_enrolment_week_operator"
+    t.boolean "has_run_first_time_setup_check"
+    t.integer "rule_id_check"
+    t.datetime "date_from_which_rule_has_been_applied_checked"
+    t.integer "tutorial_id_check"
     t.index ["rule_id"], name: "index_conditions_on_rule_id"
   end
 
@@ -129,9 +140,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_17_002003) do
   end
 
   create_table "insight_action_logs", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.string "student_name", null: false
+    t.bigint "project_id", null: false
     t.datetime "date", null: false
     t.bigint "rule_id", null: false
+    t.index ["project_id"], name: "index_insight_action_logs_on_project_id"
     t.index ["rule_id"], name: "index_insight_action_logs_on_rule_id"
   end
 

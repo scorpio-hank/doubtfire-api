@@ -50,7 +50,7 @@ class Rule < ApplicationRecord
         end
 
         # Create an insight action to log this action
-        InsightActionLog.create!(student_name: project.student.name, rule: self, date: Time.now.to_datetime)
+        InsightActionLog.create!(project: project, rule: self, date: Time.now.to_datetime)
         # have the above visible to Tutor and Unit Chair as a log through front end
       end
 

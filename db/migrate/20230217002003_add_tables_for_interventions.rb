@@ -16,14 +16,11 @@ class AddTablesForInterventions < ActiveRecord::Migration[7.0]
       t.references :insight, null: false
       t.boolean    :global_rule, null: false # whether the rule is unit level(?)
       t.integer    :operator, null: false 
-
       # stop processing more rules
-
     end
 
-
     create_table :insight_action_logs do |t|
-      t.string     :student_name, null: false
+      t.references :project, null: false
       t.datetime   :date, null: false
       t.references :rule, null: false
     end
@@ -32,18 +29,32 @@ class AddTablesForInterventions < ActiveRecord::Migration[7.0]
       t.string     :type, null: false
       t.boolean    :global_condition, null: false
       t.references :rule, null: false
-      
+      # Name Condition Variables - to be deleted
       t.string     :starting_letter_first_name  
-      
+      # Target Grade Variables
       t.integer     :target_grade_checked
       t.integer     :target_grade_operator
+      # Task Status Count Condition
+      t.integer     :task_status_checked
+      t.integer     :count_of_tasks
+      t.integer     :task_comparison_operator
+      t.integer     :weeks_since_task_was_due
+      t.integer     :task_grade_checked
+      # Unit Enrolment Week Condition
+      t.integer     :unit_enrolment_week_check
+      t.integer     :unit_enrolment_week_operator
+      # Has Never Logged In Condition
+      t.boolean     :has_run_first_time_setup_check
+      # Has Rule Been Previously Applied Condition
+      t.integer     :rule_id_check
+      t.datetime    :date_from_which_rule_has_been_applied_checked
+      # Tutorial Enrolment Condition
+      t.integer     :tutorial_id_check
     end
 
     create_table :actions do |t|
-      t.string     :name # optionally give the action a name - may not be required 
-      t.string     :type, null: false
-      # t.bigint     :action_scope
-      # t.string     :action_scope_type
+      t.string      :name # optionally give the action a name - may not be required 
+      t.string      :type, null: false
       t.references  :action_scope, polymorphic: true
       t.string      :email_template
     end

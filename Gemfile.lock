@@ -172,6 +172,9 @@ GEM
     http-accept (1.7.0)
     http-cookie (1.0.5)
       domain_name (~> 0.5)
+    httparty (0.21.0)
+      mini_mime (>= 1.0.0)
+      multi_xml (>= 0.5.2)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     icalendar (2.8.0)
@@ -214,6 +217,7 @@ GEM
       tcp_timeout (~> 0.1.1)
     msgpack (1.6.0)
     multi_json (1.15.0)
+    multi_xml (0.6.0)
     mustermann (3.0.0)
       ruby2_keywords (~> 0.0.1)
     mustermann-grape (1.0.2)
@@ -426,6 +430,7 @@ DEPENDENCIES
   grape-swagger
   grape-swagger-rails
   hirb
+  httparty
   icalendar (~> 2.5, >= 2.5.3)
   json-jwt
   listen

@@ -92,3 +92,6 @@ gem 'net-smtp', require: false
 
 # Markdown support
 gem 'redcarpet'
+
+# Microsoft Teams webhook integration
+gem 'httparty'

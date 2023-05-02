@@ -46,14 +46,14 @@
 <body>
   <main>
     <h1><%= @email_header %></h1>
-    <p class="subtext"><%= "#{Time.now.day.ordinalize}" %></p>
+    <p class="subtext"><%= "#{Time.now.to_date}" %></p>
 
-    <p>
-        Hi <%= @student.first_name %>,
-        <%= markdown note.body %>
-        Regards, <br />
-        <!-- From the user who generated the insight -->
-    </p>
+  <p>
+    Hi <%= @student.first_name %>,<br>
+    <%= markdown_to_html(@email_template) %>
+    Regards, <br>
+    Your Teaching Team<br>
+  </p>
   </main>
 </body>
 </html>

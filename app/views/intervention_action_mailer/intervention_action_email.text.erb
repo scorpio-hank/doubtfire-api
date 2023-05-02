@@ -1,0 +1,10 @@
+<%= @email_header %>
+--------------------------------------
+Date: <%= "#{Time.now.day.ordinalize}" %>
+
+Hi <%= @student.first_name %>,
+
+<%= @email_template %>
+
+Regards,
+<%# From the user who generated the insight %>
